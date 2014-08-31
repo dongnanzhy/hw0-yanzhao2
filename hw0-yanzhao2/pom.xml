@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.cmu.lti.11791.f14.hw0</groupId>
   <artifactId>hw0-yanzhao2</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.5</version>
   <scm>
   	<connection>
      scm:git:git@github.com:dongnanzhy/hw0-yanzhao2.git</connection>
