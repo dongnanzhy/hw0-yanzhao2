@@ -5,17 +5,25 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import Tag.sentenceTag;
 
+/**
+ * This class used to annotate the sentence.  
+ * @author Yan Zhao
+ * @version 1.0 September, 2014.
+ */
 public class anno_sentence extends JCasAnnotator_ImplBase {
 
-  @Override
+  /**
+   * process(JCas arg0)     Read content from CAS, split it by line, and annotate them by their ID and content. 
+   * @param aCAS  
+   */
   public void process(JCas arg0) throws AnalysisEngineProcessException {
-    // TODO Auto-generated method stub
-
     String text = arg0.getDocumentText();
     String[] sentence = text.split("\n");
     for (int i = 0; i< sentence.length; i++){
+      /**
+       * The first whitespace split the ID and content.
+       */
       int partition = sentence[i].indexOf(' ');
-      //System.out.println(text[i]);
       String sentenceID = sentence[i].substring(0, partition);
       String sentenceContent = sentence[i].substring(partition).trim();
       
@@ -25,5 +33,4 @@ public class anno_sentence extends JCasAnnotator_ImplBase {
       annot.addToIndexes();
     }
   }
-
 }

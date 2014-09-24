@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
-
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
@@ -16,21 +15,28 @@ import org.xml.sax.SAXException;
 
 import Tag.geneTag;
 
-
+/**
+ * This class used to write the annotated gene words into output file.
+ * @author Yan Zhao
+ * @version 2.0 September, 2014.
+ */
 public class Consumer extends CasConsumer_ImplBase {
-
   File out = null;
   File test = null;
   HashMap<String, Integer> table = new HashMap<String, Integer>();
   BufferedWriter bw = null;
   
+  /**
+   * @param  hit, miss    the number of hit, miss between result using lingpipe and sample.out.
+   * @param  answer       the number of words in sample.out
+   */
   int hit = 0, miss = 0, answer = 0;
 
-  @Override
+  /**
+   * initialize()   used to set the output path of files and the path of sample.out.
+   */
   public void initialize() {
-
     try {
-    //out = new File((String) getConfigParameterValue("OUTPUT_FILE"));
     out = new File("src/main/resources/data/hw1-yanzhao2.out");
     bw = new BufferedWriter(new FileWriter(out));
     } catch (Exception e) {
@@ -41,7 +47,6 @@ public class Consumer extends CasConsumer_ImplBase {
     try {
       dict = new Scanner(test);
     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
@@ -52,17 +57,17 @@ public class Consumer extends CasConsumer_ImplBase {
     
   }
   
-  @Override
+  /**
+   * process(JCas arg0)     output the gene words. Calculating the F1_Score of the output, and print.
+   * @param aCAS  
+   */
   public void processCas(CAS arg0) throws ResourceProcessException {
-    // TODO Auto-generated method stub
     JCas jcas;
     try {
       jcas = arg0.getJCas();
     } catch (CASException e) {
       throw new ResourceProcessException(e);
     }
-
-    // retrieve the filename of the input file from the CAS
     FSIterator<org.apache.uima.jcas.tcas.Annotation> it = jcas.getAnnotationIndex(geneTag.type).iterator();
     System.out.println("Consuming CAS");
     String geneId = null;
@@ -77,6 +82,9 @@ public class Consumer extends CasConsumer_ImplBase {
       begin = annotate.getBegin();
       end = annotate.getEnd();  
       
+      /**
+       * @param output      String need to write into output file, including ID and content.
+       */
       output = geneId + "|" + begin + " " + end + "|" + geneContent;
       if (table.containsKey(output)) {
         hit++;
@@ -84,7 +92,6 @@ public class Consumer extends CasConsumer_ImplBase {
         miss++;
       }
 
-    // write to output file
       try {
         writeIntoFile(output);
       } catch (IOException e) {
@@ -92,7 +99,6 @@ public class Consumer extends CasConsumer_ImplBase {
       } catch (SAXException e) {
         throw new ResourceProcessException(e);
       } catch (Exception e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
       
@@ -100,9 +106,13 @@ public class Consumer extends CasConsumer_ImplBase {
     double precision = hit * 1.0 / (hit + miss);
     double recall = hit * 1.0 / answer;
     System.out.println("Precision: " + precision + " " + "Recall: " + recall + " " 
-                      + "F-Meause: " + 2 * precision * recall / (precision + recall));
+                      + "F1_Score: " + 2 * precision * recall / (precision + recall));
   }
   
+  /**
+   * writeIntoFile(String output)   write a string into output file
+   * @param output                  String need to write.
+   */
   public void writeIntoFile(String output) 
       throws Exception {
         bw.write(output);
@@ -110,9 +120,10 @@ public class Consumer extends CasConsumer_ImplBase {
         bw.flush();
       }
 
-      @Override
+  /**
+   * destroy   
+   */
   public void destroy() {
-
       try {
         if (bw != null) {
           bw.close();
@@ -122,5 +133,4 @@ public class Consumer extends CasConsumer_ImplBase {
         e.printStackTrace();
       }
   }
-
 }
