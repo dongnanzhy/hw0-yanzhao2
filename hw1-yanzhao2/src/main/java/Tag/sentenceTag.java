@@ -16,12 +16,12 @@ import org.apache.uima.jcas.tcas.Annotation;
  */
 public class sentenceTag extends Annotation {
   /** 
-   * @ordered 
+   *  
    */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(sentenceTag.class);
   /**
-   * @ordered 
+   *  
    */
   @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
