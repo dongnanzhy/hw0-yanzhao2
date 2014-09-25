@@ -15,14 +15,14 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
  * Updated by JCasGen Tue Sep 23 07:31:01 PDT 2014
- * @generated */
+ */
 public class sentenceTag_Type extends Annotation_Type {
-  /** @generated 
+  /** 
    * @return the generator for this type
    */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
-  /** @generated */
+
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
@@ -38,19 +38,17 @@ public class sentenceTag_Type extends Annotation_Type {
         } else return new sentenceTag(addr, sentenceTag_Type.this);
   	  }
     };
-  /** @generated */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = sentenceTag.typeIndexID;
-  /** @generated 
-     @modifiable */
+
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("Tag.sentenceTag");
  
-  /** @generated */
+
   final Feature casFeat_id;
-  /** @generated */
+
   final int     casFeatCode_id;
-  /** @generated
+  /** 
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
@@ -59,7 +57,7 @@ public class sentenceTag_Type extends Annotation_Type {
       jcas.throwFeatMissing("id", "Tag.sentenceTag");
     return ll_cas.ll_getStringValue(addr, casFeatCode_id);
   }
-  /** @generated
+  /** 
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
@@ -70,11 +68,10 @@ public class sentenceTag_Type extends Annotation_Type {
     
   
  
-  /** @generated */
   final Feature casFeat_content;
-  /** @generated */
+
   final int     casFeatCode_content;
-  /** @generated
+  /** 
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
@@ -83,7 +80,7 @@ public class sentenceTag_Type extends Annotation_Type {
       jcas.throwFeatMissing("content", "Tag.sentenceTag");
     return ll_cas.ll_getStringValue(addr, casFeatCode_content);
   }
-  /** @generated
+  /**
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
@@ -97,7 +94,6 @@ public class sentenceTag_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	 * @generated
 	 * @param jcas JCas
 	 * @param casType Type 
 	 */
