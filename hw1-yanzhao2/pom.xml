@@ -110,4 +110,8 @@
     	<version>4.1.0</version>
     </dependency>
   </dependencies>
+  <scm>
+  	<connection>scm:git:git@github.com:dongnanzhy/hw0-yanzhao2.git</connection>
+  	<developerConnection>scm:git:git@github.com:dongnanzhy/hw0-yanzhao2.git</developerConnection>
+  </scm>
 </project>
